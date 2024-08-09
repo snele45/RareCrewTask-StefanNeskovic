@@ -1,0 +1,28 @@
+  <div class="card">
+    <div class="card-header">
+      Task A
+    </div>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Total Time in Month</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let employee of employees" [class.highlight]="employee.totalHours < 100">
+            <td>{{ employee.name }}</td>
+            <td>{{ employee.totalHours }} hrs</td>
+            <td><a href="#">Edit</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  
+
+
+  
