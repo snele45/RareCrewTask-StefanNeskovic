@@ -1,10 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import axios from 'axios';
-
-interface Employee {
-  name: string;
-  totalHours: number;
-}
+import { BehaviorSubject } from 'rxjs';
+import { Employee } from '../models/empolyee.model'; 
 
 function calculateTotalHours(start: string, end: string): number {
   const startDate = new Date(start);
@@ -12,19 +9,14 @@ function calculateTotalHours(start: string, end: string): number {
   return (endDate.getTime() - startDate.getTime()) / (1000 * 3600);
 }
 
-@Component({
-  selector: 'app-employee-table',
-  templateUrl: './employee-table.component.html',
-  styleUrls: ['./employee-table.component.css']
+@Injectable({
+  providedIn: 'root'
 })
-export class EmployeeTableComponent implements OnInit {
-  employees: Employee[] = [];
+export class EmployeeService {
+  private employeeDataSource = new BehaviorSubject<Employee[]>([]);
+  employeeData = this.employeeDataSource.asObservable();
 
   constructor() { }
-
-  ngOnInit() {
-    this.fetchEmployees();
-  }
 
   async fetchEmployees() {
     try {
@@ -38,14 +30,14 @@ export class EmployeeTableComponent implements OnInit {
         }
       });
 
-     
-      this.employees = Array.from(hoursMap.entries()).map(([name, totalHours]) => ({
+      const employees = Array.from(hoursMap.entries()).map(([name, totalHours]) => ({
         name: name,
         totalHours: Math.ceil(totalHours)
       })).sort((a, b) => b.totalHours - a.totalHours);
+
+      this.employeeDataSource.next(employees);
     } catch (error) {
       console.error('Error fetching data: ', error);
-      
     }
   }
 }
