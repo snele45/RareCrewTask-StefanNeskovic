@@ -7,8 +7,9 @@
 </head>
 <body>
     <div id="employeeData"></div>
+    <img id="workChart" src="/api/Employee/GenerateChart" alt="Work Hours Chart" />
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             fetch('/api/Employee/GetEmployeesHtml')
                 .then(response => response.text())
                 .then(html => {
