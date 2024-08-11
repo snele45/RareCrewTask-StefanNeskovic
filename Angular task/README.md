@@ -1,27 +1,55 @@
-# EmployeeTracking
+# Employee Management Dashboard
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.4.
+This project is an Angular application that displays employee work hours in a table and on a pie chart. The project consists of two main components: `EmployeeTableComponent` and `PieChartComponent`, which display the data in tabular and graphical formats, respectively.
 
-## Development server
+## Project Setup
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+This project was generated with Angular CLI. The steps to set up the project and the necessary components are described below.
 
-## Code scaffolding
+### Step 1: Create a New Angular Project
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+First, I created a new Angular project using the Angular CLI. Use the `--no-standalone` flag to ensure the project has an `app.module.ts` file.
 
-## Build
+```bash
+ng new employee-tracking --no-standalone
+cd employee-tracking
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Step 2: Generate Components
 
-## Running unit tests
+```bash
+ng generate component components/employee-table
+ng generate component components/pie-chart
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Step 4: Create the Employee Model
 
-## Running end-to-end tests
+This model defines the data structure with fields for the employee's name and total work hours.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### Step 5: Create the Employee Service
+The service uses axios to fetch data from an API and uses BehaviorSubject to emit updated data to the components.
 
-## Further help
+### Step 6: Implement the Employee Table Component
+The EmployeeTableComponent displays a list of employees and their total work hours in a table format. The component uses EmployeeService to fetch and display the data.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### Step 7: Implement the Pie Chart Component
+The PieChartComponent displays the distribution of employee work hours on a pie chart using Chart.js. The component also uses EmployeeService to fetch data and generate the chart.
+
+```bash
+npm install chart.js
+```
+
+### Step 8: Style the Components
+Both components are styled using Bootstrap and additional custom styles. The styles are set to display the components in consistently styled cards.
+
+
+### Step 9: Run the Project
+To run the project, use the Angular CLI's ng serve command. This will compile the project and start a development server. You can then view the application in your web browser.
+
+```bash
+ng serve
+```
+
+Open your browser and navigate to `http://localhost:4200` to see the application running.
+
+
